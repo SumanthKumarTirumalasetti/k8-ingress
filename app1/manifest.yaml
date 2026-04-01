@@ -29,7 +29,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: nginx
+  name: app1
 spec:
   selector:
     app: app1
@@ -37,4 +37,31 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:777653593714:certificate/17fe3b9c-d2b1-4918-a5d0-4a4c49540b49
+    alb.ingress.kubernetes.io/group.name: sumanth7696
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "app1.devopspractice.help"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app1
+            port:
+              number: 80
+
 
