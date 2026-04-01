@@ -32,7 +32,7 @@ metadata:
   name: nginx
 spec:
   selector:
-    app: nginx
+    app: app1
   ports:
   - protocol: TCP
     port: 80
