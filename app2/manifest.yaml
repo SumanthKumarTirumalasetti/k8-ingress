@@ -53,7 +53,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.devopspractice.help"
+  - host: "app2.devopspractice.help"
     http:
       paths:
       - path: /
